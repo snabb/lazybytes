@@ -32,6 +32,8 @@ func NewReader(f func() []byte) *Reader {
 }
 
 func (r *Reader) initialize() {
+	// note that this is not thread safe
+	// change to use sync.Once if thread safety is required
 	if r.br == nil {
 		r.br = bytes.NewReader(r.initFunc())
 	}
